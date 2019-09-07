@@ -10,3 +10,4 @@ DELETE /v1/user/{userId} – userId로 기존회원의 정보를 삭제한다.
 ```
 http://localhost:8080/swagger-ui.html
 ```
+![swagger_html](https://user-images.githubusercontent.com/34512538/64470974-6f060880-d186-11e9-9797-76e971781f01.PNG)
