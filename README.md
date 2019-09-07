@@ -11,3 +11,7 @@ DELETE /v1/user/{userId} – userId로 기존회원의 정보를 삭제한다.
 http://localhost:8080/swagger-ui.html
 ```
 ![swagger_html](https://user-images.githubusercontent.com/34512538/64470974-6f060880-d186-11e9-9797-76e971781f01.PNG)
+## Spring Security
+- Sigin Up, Sign In
+- 제한된 리소스에 접근가능한 ROLE_USER 권한은 "회원"에게 부여
+- 권한을 가진 회원이 Sign In에 성공 -> 제한된 리소스에 접근가능한 Jwt Token 발급
