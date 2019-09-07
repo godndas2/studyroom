@@ -51,11 +51,11 @@ public class ResponseService {
         return result;
     }
     // 실패 결과만 처리해주는 method
-    public CommonResult getFailedResult() {
+    public CommonResult getFailedResult(int code, String msg) {
         CommonResult result = new CommonResult();
         result.setSuccess(false);
-        result.setCode(CommonResponse.FAILED.getCode());
-        result.setMsg(CommonResponse.FAILED.getMsg());
+        result.setCode(code);
+        result.setMsg(msg);
         return result;
     }
     // 결과 모델에 API 요청 성공 data를 setting 해주는 method

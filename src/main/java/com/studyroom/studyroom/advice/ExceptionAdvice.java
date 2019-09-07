@@ -4,6 +4,8 @@ import com.studyroom.studyroom.advice.exception.CustomUserNotFound;
 import com.studyroom.studyroom.model.response.CommonResult;
 import com.studyroom.studyroom.service.ResponseService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -22,18 +24,27 @@ import javax.servlet.http.HttpServletRequest;
 public class ExceptionAdvice {
 
     private final ResponseService responseService;
+    private final MessageSource messageSource;
 
-//    @ExceptionHandler(Exception.class)
-//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR) // 해당 Exception(500)이 발생하면 Response에 500 Error을 발생시킴
-//    protected CommonResult defaultException(HttpServletRequest request, Exception e) {
-//        return responseService.getFailedResult();
-//    }
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR) // 해당 Exception(500)이 발생하면 Response에 500 Error을 발생시킴
+    protected CommonResult defaultException(HttpServletRequest request, Exception e) {
+        return responseService.getFailedResult(Integer.valueOf(getMessage("unKnown.code")), getMessage("unKnown.msg"));
+    }
 
     @ExceptionHandler(CustomUserNotFound.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     protected CommonResult userNotFoundException(HttpServletRequest request, CustomUserNotFound customUserNotFound) {
-        return responseService.getFailedResult();
+        return responseService.getFailedResult(Integer.valueOf(getMessage("userNotFound.code")), getMessage("userNotFound.msg"));
     }
 
+    // code 정보에 해당하는 msg를 조회
+    private String getMessage(String code) {
+        return getMessage(code, null);
+    }
+    // code 정보, 추가 argument로 현재 Locale에 맞는 msg를 조회
+    private String getMessage(String code, Object[] args) {
+        return messageSource.getMessage(code, args, LocaleContextHolder.getLocale());
+    }
 
 }
