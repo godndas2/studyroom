@@ -1,12 +1,16 @@
 package com.studyroom.studyroom.advice;
 
+import com.studyroom.studyroom.advice.exception.CustomAuthenticationEntryPointException;
+import com.studyroom.studyroom.advice.exception.CustomEmailSigninFailedException;
 import com.studyroom.studyroom.advice.exception.CustomUserNotFound;
+import com.studyroom.studyroom.config.security.CustomAuthenticationEntryPoint;
 import com.studyroom.studyroom.model.response.CommonResult;
 import com.studyroom.studyroom.service.ResponseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -38,6 +42,21 @@ public class ExceptionAdvice {
         return responseService.getFailedResult(Integer.valueOf(getMessage("userNotFound.code")), getMessage("userNotFound.msg"));
     }
 
+    @ExceptionHandler(CustomEmailSigninFailedException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    protected CommonResult emailSigninFailed(HttpServletRequest request, CustomEmailSigninFailedException e) {
+        return responseService.getFailedResult(Integer.valueOf(getMessage("emailSigninFailed.code")), getMessage("emailSigninFailed.msg"));
+    }
+
+    @ExceptionHandler(CustomAuthenticationEntryPointException.class)
+    public CommonResult authenticationEntryPointException(HttpServletRequest request, CustomAuthenticationEntryPointException e) {
+        return responseService.getFailedResult(Integer.valueOf(getMessage("entryPointException.code")), getMessage("entryPointException.msg"));
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public CommonResult AccessDeniedException(HttpServletRequest request, AccessDeniedException e) {
+        return responseService.getFailedResult(Integer.valueOf(getMessage("accessDenied.code")), getMessage("accessDenied.msg"));
+    }
     // code 정보에 해당하는 msg를 조회
     private String getMessage(String code) {
         return getMessage(code, null);

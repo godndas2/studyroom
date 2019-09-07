@@ -13,8 +13,10 @@ spring:
     open-in-view: false
     show-sql: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
       # i8n 경로 및 Encoding
   messages:
     basename: i18n/exception
     encoding: UTF-8
+  jwt:
+    secret: halfdev!@$&
