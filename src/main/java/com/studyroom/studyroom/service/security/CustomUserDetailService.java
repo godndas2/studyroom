@@ -1,4 +1,4 @@
-package com.studyroom.studyroom.config.security;
+package com.studyroom.studyroom.service.security;
 
 import com.studyroom.studyroom.advice.exception.CustomUserNotFound;
 import com.studyroom.studyroom.repository.UserRepository;

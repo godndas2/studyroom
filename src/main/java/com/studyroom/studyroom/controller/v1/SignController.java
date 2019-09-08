@@ -37,11 +37,11 @@ public class SignController {
         if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new CustomEmailSigninFailedException();
         }
-        return responseService.getSingleResult(jwtTokenProvider.createToken(user.getUsername(), user.getRoles()));
+        return responseService.getSingleResult(jwtTokenProvider.createToken(String.valueOf(user.getMsrl()), user.getRoles()));
     }
 
     @ApiOperation(value = "회원가입", notes = "회원가입")
-    @GetMapping(value = "/signUp")
+    @PostMapping(value = "/signUp")
     public CommonResult signup(@ApiParam(value = "회원ID : 이메일", required = true)
                                @RequestParam String id,
                                @ApiParam(value = "비밀번호", required = true)

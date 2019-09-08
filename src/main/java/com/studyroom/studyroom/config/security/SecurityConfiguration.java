@@ -50,8 +50,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Jwt Token이라 Session이 필요없음
                 .and()
                     .authorizeRequests() // 다음 Request에 대한 권한 체크
-                        .antMatchers("/*/signIn", "/*/signUp").permitAll()
-                        .antMatchers(HttpMethod.GET, "/exception/**","helloworld/**").permitAll()
+                        .antMatchers(
+                                "/*/signIn"
+                                , "/*/signIn/**"
+                                , "/*/signUp"
+                                , "/*/signUp/**").permitAll()
+                        .antMatchers(
+                                HttpMethod.GET
+                                , "/exception/**"
+                                ,"helloworld/**").permitAll()
                         .antMatchers("/*/users").hasRole("ADMIN")
                         .anyRequest().hasRole("USER") // 그 외 나머지 요청은 모두 인증된 회원만 접근 가능
                 .and()

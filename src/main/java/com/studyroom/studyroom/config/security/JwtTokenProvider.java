@@ -22,7 +22,7 @@ import java.util.List;
 @Component
 public class JwtTokenProvider { // JWT Token 생성 및 검증하는 Module
 
-    @Value("spring.jwt.secret")
+    @Value("${spring.jwt.secret}")
     private String secretKey;
     private long tokenValidMilisecond = 1000L * 60 * 60; // 1 HOUR : 1L = !000 sec
     private final UserDetailsService userDetailsService;

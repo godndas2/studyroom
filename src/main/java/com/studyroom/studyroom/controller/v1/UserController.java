@@ -40,9 +40,9 @@ public class UserController {
     }
 
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 access_token", required = false, dataType = "String", paramType = "header")
+            @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 access_token", required = true, dataType = "String", paramType = "header")
     })
-    @ApiOperation(value = "회원 단일 조회", notes = "userId로 회원 조회")
+    @ApiOperation(value = "회원 단일 조회", notes = "mrsl로 회원 조회")
     @GetMapping(value = "/user")
     public SingleResult<User> findByUserId(@ApiParam(value = "언어", defaultValue = "ko")
                                            @RequestParam String lang){
