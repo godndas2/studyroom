@@ -15,5 +15,11 @@ http://localhost:8080/swagger-ui.html
 - Sigin Up, Sign In
 - 제한된 리소스에 접근가능한 ROLE_USER 권한은 "회원"에게 부여
 - 권한을 가진 회원이 Sign In에 성공 -> 제한된 리소스에 접근가능한 Jwt Token 발급  
-![token](https://user-images.githubusercontent.com/34512538/64478039-58d76700-d1dd-11e9-96a8-cabebfe7e066.PNG)
+
+<b>SignIn Success</b>
+![token](https://user-images.githubusercontent.com/34512538/64478039-58d76700-d1dd-11e9-96a8-cabebfe7e066.PNG)  
+<b>회원 조회</b>
+![jwt login](https://user-images.githubusercontent.com/34512538/64483342-1d6b8580-d23b-11e9-8112-01a7a3af5483.PNG)
+
+
 
