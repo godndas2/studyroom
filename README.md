@@ -19,7 +19,9 @@ http://localhost:8080/swagger-ui.html
 <b>SignIn Success</b>
 ![token](https://user-images.githubusercontent.com/34512538/64478039-58d76700-d1dd-11e9-96a8-cabebfe7e066.PNG)  
 <b>회원 조회</b>
-![jwt login](https://user-images.githubusercontent.com/34512538/64483342-1d6b8580-d23b-11e9-8112-01a7a3af5483.PNG)
-
+![jwt login](https://user-images.githubusercontent.com/34512538/64483342-1d6b8580-d23b-11e9-8112-01a7a3af5483.PNG)  
+## ISSUE
+## ToDo
+- Refresh Token 발급 되는 시점 및 Refresh Token 발급 확인
 
 
