@@ -13,10 +13,21 @@ spring:
     open-in-view: false
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
       # i8n 경로 및 Encoding
   messages:
     basename: i18n/exception
     encoding: UTF-8
   jwt:
     secret: halfdev!@$&
+
+social:
+  kakao:
+    client_id: 3320a3c2b8a3cab191065782e61d4446 # REST API Key
+    redirect: /social/login/kakao # SocialController
+    url:
+      login: https://kauth.kakao.com/oauth/authorize
+      token: https://kauth.kakao.com/oauth/token
+      profile: https://kapi.kakao.com/v2/user/me
+url:
+  base: http://localhost:8080

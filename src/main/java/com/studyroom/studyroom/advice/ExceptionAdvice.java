@@ -1,6 +1,7 @@
 package com.studyroom.studyroom.advice;
 
 import com.studyroom.studyroom.advice.exception.CustomAuthenticationEntryPointException;
+import com.studyroom.studyroom.advice.exception.CustomCommunicationException;
 import com.studyroom.studyroom.advice.exception.CustomEmailSigninFailedException;
 import com.studyroom.studyroom.advice.exception.CustomUserNotFound;
 import com.studyroom.studyroom.config.security.CustomAuthenticationEntryPoint;
@@ -56,6 +57,12 @@ public class ExceptionAdvice {
     @ExceptionHandler(AccessDeniedException.class)
     public CommonResult AccessDeniedException(HttpServletRequest request, AccessDeniedException e) {
         return responseService.getFailedResult(Integer.valueOf(getMessage("accessDenied.code")), getMessage("accessDenied.msg"));
+    }
+
+    @ExceptionHandler(CustomCommunicationException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public CommonResult communicationException(HttpServletRequest request, CustomCommunicationException e) {
+        return responseService.getFailedResult(Integer.valueOf(getMessage("communicationError.code")), getMessage("communicationError.msg"));
     }
     // code 정보에 해당하는 msg를 조회
     private String getMessage(String code) {

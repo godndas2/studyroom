@@ -7,4 +7,6 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByUid(String email);
+    // uid 및 provider 정보로 social 회원정보 조회
+    Optional<User> findByUidAndProvider(String uid, String provider);
 }
