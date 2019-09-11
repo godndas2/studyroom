@@ -1,13 +1,19 @@
 package com.studyroom.studyroom.controller.common;
 
 import com.google.gson.Gson;
+import com.studyroom.studyroom.advice.exception.CustomUserNotFound;
+import com.studyroom.studyroom.model.User;
+import com.studyroom.studyroom.model.response.SingleResult;
+import com.studyroom.studyroom.model.social.KakaoProfile;
+import com.studyroom.studyroom.repository.UserRepository;
+import com.studyroom.studyroom.service.user.KakaoService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,6 +26,7 @@ public class SocialController {
     private final RestTemplate restTemplate;
     private final Gson gson;
     private final KakaoService kakaoService;
+    private final UserRepository userRepository;
 
     @Value("${spring.url.base}")
     private String baseUrl;

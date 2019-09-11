@@ -1,9 +1,6 @@
 package com.studyroom.studyroom.advice;
 
-import com.studyroom.studyroom.advice.exception.CustomAuthenticationEntryPointException;
-import com.studyroom.studyroom.advice.exception.CustomCommunicationException;
-import com.studyroom.studyroom.advice.exception.CustomEmailSigninFailedException;
-import com.studyroom.studyroom.advice.exception.CustomUserNotFound;
+import com.studyroom.studyroom.advice.exception.*;
 import com.studyroom.studyroom.config.security.CustomAuthenticationEntryPoint;
 import com.studyroom.studyroom.model.response.CommonResult;
 import com.studyroom.studyroom.service.ResponseService;
@@ -64,6 +61,13 @@ public class ExceptionAdvice {
     public CommonResult communicationException(HttpServletRequest request, CustomCommunicationException e) {
         return responseService.getFailedResult(Integer.valueOf(getMessage("communicationError.code")), getMessage("communicationError.msg"));
     }
+
+    @ExceptionHandler(CustomUserExistException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public CommonResult communicationException(HttpServletRequest request, CustomUserExistException e) {
+        return responseService.getFailedResult(Integer.valueOf(getMessage("existingUser.code")), getMessage("existingUser.msg"));
+    }
+    
     // code 정보에 해당하는 msg를 조회
     private String getMessage(String code) {
         return getMessage(code, null);

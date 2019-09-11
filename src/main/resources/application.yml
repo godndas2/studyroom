@@ -20,6 +20,8 @@ spring:
     encoding: UTF-8
   jwt:
     secret: halfdev!@$&
+  banner:
+    location: classpath:/banner.txt
 
 social:
   kakao:
