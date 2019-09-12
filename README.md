@@ -21,8 +21,16 @@ http://localhost:8080/social/login
 ![token](https://user-images.githubusercontent.com/34512538/64478039-58d76700-d1dd-11e9-96a8-cabebfe7e066.PNG)  
 <b>회원 조회</b>
 ![jwt login](https://user-images.githubusercontent.com/34512538/64483342-1d6b8580-d23b-11e9-8112-01a7a3af5483.PNG)  
+
+> http://localhost:8080/social/login/kakao?code=XXXXXXXXXXX
+- SocialController.java의 /social/login/kakao에서 parameter로 전달된 code 정보로 kakao access_token을 얻는 api 호출  
+- access_token으로 kakao의 profile api 호출
+- kakao 정보로 가입되어있는지 database에서 확인
+- 가입자라면 jwt token 발급  
+
+![kakao restapi](https://user-images.githubusercontent.com/34512538/64781295-7caff980-d59d-11e9-884d-85400673d656.PNG)
+
 ## ISSUE
 ## ToDo
-- Refresh Token 발급 되는 시점 및 Refresh Token 발급 확인
 
 
