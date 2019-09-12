@@ -22,14 +22,13 @@ spring:
     secret: halfdev!@$&
   banner:
     location: classpath:/banner.txt
-
-social:
-  kakao:
-    client_id: 3320a3c2b8a3cab191065782e61d4446 # REST API Key
-    redirect: /social/login/kakao # SocialController
-    url:
-      login: https://kauth.kakao.com/oauth/authorize
-      token: https://kauth.kakao.com/oauth/token
-      profile: https://kapi.kakao.com/v2/user/me
-url:
-  base: http://localhost:8080
+  social:
+    kakao:
+      client_id: 3320a3c2b8a3cab191065782e61d4446 # REST API Key
+      redirect: /social/login/kakao # SocialController
+      url:
+        login: https://kauth.kakao.com/oauth/authorize
+        token: https://kauth.kakao.com/oauth/token
+        profile: https://kapi.kakao.com/v2/user/me
+  url:
+    base: http://localhost:8080

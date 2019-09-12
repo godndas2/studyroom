@@ -1,6 +1,7 @@
 package com.studyroom.studyroom.controller.v1;
 
 import com.studyroom.studyroom.advice.exception.CustomEmailSigninFailedException;
+import com.studyroom.studyroom.advice.exception.CustomUserExistException;
 import com.studyroom.studyroom.advice.exception.CustomUserNotFound;
 import com.studyroom.studyroom.config.security.JwtTokenProvider;
 import com.studyroom.studyroom.model.User;
@@ -68,9 +69,7 @@ public class SignController {
             @ApiParam(value = "서비스 제공자", required = true, defaultValue = "kakao")
             @PathVariable String provider,
             @ApiParam(value = "소셜 access_token", required = true)
-            @RequestParam String accessToken)
-        /*  @ApiParam(value = "이름", required = true)
-            @RequestParam String name */ {
+            @RequestParam String accessToken) {
         KakaoProfile profile = kakaoService.getKakaoProfile(accessToken);
         User user = userRepository.findByUidAndProvider(String.valueOf(profile.getId()), provider).orElseThrow(CustomUserNotFound::new);
         return responseService.getSingleResult(jwtTokenProvider.createToken(String.valueOf(user.getMsrl()), user.getRoles()));
@@ -80,20 +79,23 @@ public class SignController {
     @PostMapping(value = "/signUp/{provider}")
     public CommonResult signupProvider(@ApiParam(value = "서비스 제공자 provider", required = true, defaultValue = "kakao")
                                        @PathVariable String provider,
-                                       @ApiParam(value = "소셜 access_token", required = true) @RequestParam String accessToken,
-                                       @ApiParam(value = "이름", required = true) @RequestParam String name) {
+                                       @ApiParam(value = "소셜 access_token", required = true)
+                                       @RequestParam String accessToken,
+                                       @ApiParam(value = "이름", required = true)
+                                       @RequestParam String name) {
 
         KakaoProfile profile = kakaoService.getKakaoProfile(accessToken);
         Optional<User> user = userRepository.findByUidAndProvider(String.valueOf(profile.getId()), provider);
         if (user.isPresent())
-            throw new CustomUserNotFound();
+            throw new CustomUserExistException();
 
-        userRepository.save(User.builder()
+        User addUser = User.builder()
                 .uid(String.valueOf(profile.getId()))
                 .provider(provider)
                 .name(name)
                 .roles(Collections.singletonList("ROLE_USER"))
-                .build());
+                .build();
+        userRepository.save(addUser);
         return responseService.getSuccessResult();
     }
 }

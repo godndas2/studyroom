@@ -1,14 +1,8 @@
 package com.studyroom.studyroom.controller.common;
 
 import com.google.gson.Gson;
-import com.studyroom.studyroom.advice.exception.CustomUserNotFound;
-import com.studyroom.studyroom.model.User;
-import com.studyroom.studyroom.model.response.SingleResult;
-import com.studyroom.studyroom.model.social.KakaoProfile;
 import com.studyroom.studyroom.repository.UserRepository;
 import com.studyroom.studyroom.service.user.KakaoService;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
@@ -30,7 +24,7 @@ public class SocialController {
 
     @Value("${spring.url.base}")
     private String baseUrl;
-    @Value(("${spring.social.kakao.client_id}"))
+    @Value("${spring.social.kakao.client_id}")
     private String kakaoClientId;
     @Value("${spring.social.kakao.redirect}")
     private String kakaoRedirect;
@@ -41,8 +35,8 @@ public class SocialController {
         StringBuilder loginUrl = new StringBuilder()
                 .append(environment.getProperty("spring.social.kakao.url.login"))
                 .append("?client_id=").append(kakaoClientId)
-                .append("&amp;response_type=code")
-                .append("&amp;redirect_uri=").append(baseUrl).append(kakaoRedirect);
+                .append("&response_type=code")
+                .append("&redirect_uri=").append(baseUrl).append(kakaoRedirect);
 
         mav.addObject("loginUrl", loginUrl);
         mav.setViewName("social/login");
