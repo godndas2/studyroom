@@ -67,7 +67,19 @@ public class ExceptionAdvice {
     public CommonResult communicationException(HttpServletRequest request, CustomUserExistException e) {
         return responseService.getFailedResult(Integer.valueOf(getMessage("existingUser.code")), getMessage("existingUser.msg"));
     }
-    
+
+    @ExceptionHandler(CustomNotOwnerException.class)
+    @ResponseStatus(HttpStatus.NON_AUTHORITATIVE_INFORMATION)
+    public CommonResult notOwnerException(HttpServletRequest request, CustomNotOwnerException e) {
+        return responseService.getFailedResult(Integer.valueOf(getMessage("notOwner.code")), getMessage("notOwner.msg"));
+    }
+
+    @ExceptionHandler(CustomResourceNotExistException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public CommonResult resourceNotExistException(HttpServletRequest request, CustomResourceNotExistException e) {
+        return responseService.getFailedResult(Integer.valueOf(getMessage("resourceNotExist.code")), getMessage("resourceNotExist.msg"));
+    }
+
     // code 정보에 해당하는 msg를 조회
     private String getMessage(String code) {
         return getMessage(code, null);
