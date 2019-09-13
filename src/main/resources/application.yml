@@ -6,7 +6,7 @@ spring:
     encoding: UTF-8
   social:
     kakao:
-      client_id: 3320a3c2b8a3cab191065782e61d4446 # REST API Key
+      client_id: 877cf350333227a753e311bd4d5b5fe6 # REST API Key
       redirect: /social/login/kakao
       url:
         login: https://kauth.kakao.com/oauth/authorize
