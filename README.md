@@ -29,6 +29,10 @@ http://localhost:8080/social/login
 - 가입자라면 jwt token 발급  
 
 ![kakao restapi](https://user-images.githubusercontent.com/34512538/64781295-7caff980-d59d-11e9-884d-85400673d656.PNG)
+## Model
+- Board  
+게시글 작성
+![boardwriteapi](https://user-images.githubusercontent.com/34512538/64876015-3768f600-d689-11e9-9e46-9121ca0bcf3a.PNG)
 
 ## ISSUE
 ## ToDo
