@@ -87,6 +87,7 @@ public class BoardController {
     public CommonResult deletePost(@PathVariable long postId) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String uid = authentication.getName();
+        boardService.deletePost(postId,uid);
         return responseService.getSuccessResult();
     }
 }
