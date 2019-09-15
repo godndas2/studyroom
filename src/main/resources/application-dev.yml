@@ -17,4 +17,4 @@ spring:
     showSql: true
     generate-ddl: true
   url:
-    base: http://localhost:8080
+    base: http://localhost:8099
