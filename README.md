@@ -13,7 +13,7 @@ DELETE /v1/user/{userId} – userId로 기존회원의 정보를 삭제한다.
 ```
 https://localhost:843/swagger-ui.html
 https://localhost:843/social/login
-http://localhost:843/ <- jenkins port  
+http://localhost:8080/ <- jenkins port  
 ( API Manager - Credential - GCP Oauth Client Seceret Pw )  
 Https Keystore generate : keytool -genkey -alias tomcat -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 4000
 ```
