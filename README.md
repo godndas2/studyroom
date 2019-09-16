@@ -39,6 +39,9 @@ Https Keystore generate : keytool -genkey -alias tomcat -storetype PKCS12 -keyal
 - Board  
 게시글 작성
 ![boardwriteapi](https://user-images.githubusercontent.com/34512538/64876015-3768f600-d689-11e9-9e46-9121ca0bcf3a.PNG)
+## Oauth
+- Https Keystore  
+![https](https://user-images.githubusercontent.com/34512538/64970223-56ad9080-d8e0-11e9-8b71-f0a984b84f38.PNG)
 
 ## ISSUE
 - social login -1004 error
