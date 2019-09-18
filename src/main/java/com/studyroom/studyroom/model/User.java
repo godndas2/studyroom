@@ -40,6 +40,10 @@ public class User extends CommonDateEntity implements UserDetails {
     @Column(length = 100)
     private String provider;
 
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
+
+
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
     private List<String> roles = new ArrayList<>();
@@ -47,6 +51,20 @@ public class User extends CommonDateEntity implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() { // 한 명의 회원이 여러 개의 권한을 가질 수 있으므로 Collection
         return this.roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+    }
+
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "provider_id", referencedColumnName = "provider_id", nullable = false, updatable = false, unique = true)
+    private UserConnection social;
+
+    public static User signUp(UserConnection userConnection) {
+
+        return User.builder()
+                .email(userConnection.getEmail())
+//                .nickname(userConnection.getDisplayName())
+                .social(userConnection)
+                .build();
+
     }
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

@@ -1,15 +1,23 @@
 package com.studyroom.studyroom.config.security;
 
+import com.studyroom.studyroom.config.ClientResources;
+import com.studyroom.studyroom.service.social.SocialService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.oauth2.client.OAuth2ClientContext;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
+import org.springframework.security.oauth2.config.annotation.web.configuration.OAuth2ClientConfiguration;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /*
 * Server에 보안 설정 적용
@@ -28,11 +36,15 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
   rememberMe : 사용자가 remember me를 사용해 인증했는지 확인합니다.
   fullyAuthenticated : 사용자가 모든 credential을 갖춘 상태에서 인증했는지 확인합니다.
 * */
+@EnableWebSecurity
+@EnableOAuth2Client
 @RequiredArgsConstructor
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final JwtTokenProvider jwtTokenProvider;
+    private final OAuth2ClientContext oAuth2ClientContext;
+    private final SocialService socialService;
 
     @Bean
     @Override
@@ -66,6 +78,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPoint())
                 .and()
                     .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class); // jwt token filter를 id/pw 인증 전에 넣는다
+
+        http.logout()
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/")
+                .permitAll();
     }
 
     @Override
@@ -77,5 +96,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 "/webjars/**",
                 "/swagger/**");
 //                "/h2-console/**");
+    }
+
+    @Bean
+    @ConfigurationProperties("google")
+    public ClientResources google() {
+        return new ClientResources();
     }
 }

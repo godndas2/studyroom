@@ -15,7 +15,7 @@ spring:
     encoding: UTF-8
   social:
     kakao:
-      client_id:  # REST API Key
+      client_id: 877cf350333227a753e311bd4d5b5fe6 # REST API Key
       redirect: /social/login/kakao
       url:
         login: https://kauth.kakao.com/oauth/authorize
@@ -27,8 +27,8 @@ spring:
 # Google Oauth2.0
 google:
   client:
-    clientId:
-    clientSecret:
+    clientId: 331153258024-lfu8v6i7m0emfrdf7retdsdlgpqa5foa.apps.googleusercontent.com
+    clientSecret: fjYdo01MNhrzna4JF-3o8WTn
     accessTokenUri: https://www.googleapis.com/oauth2/v4/token
     userAuthorizationUri: https://accounts.google.com/o/oauth2/v2/auth
     clientAuthenticationScheme: form
