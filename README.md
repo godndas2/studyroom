@@ -11,9 +11,10 @@ DELETE /v1/user/{userId} – userId로 기존회원의 정보를 삭제한다.
 
 <i>Help</i>
 ```
-https://localhost:843/swagger-ui.html
-https://localhost:843/social/login
-http://localhost:8080/ <- jenkins port  
+https://localhost:443/swagger-ui.html
+https://localhost:443/social/login
+http://localhost:8080/ <- jenkins port
+https://localhost:443/signin/google
 ( API Manager - Credential - GCP Oauth Client Seceret Pw )  
 Https Keystore generate : keytool -genkey -alias tomcat -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 4000
 ```
@@ -41,10 +42,14 @@ Https Keystore generate : keytool -genkey -alias tomcat -storetype PKCS12 -keyal
 ![boardwriteapi](https://user-images.githubusercontent.com/34512538/64876015-3768f600-d689-11e9-9e46-9121ca0bcf3a.PNG)
 ## Oauth
 - Https Keystore  
-![https](https://user-images.githubusercontent.com/34512538/64970223-56ad9080-d8e0-11e9-8b71-f0a984b84f38.PNG)
+![https](https://user-images.githubusercontent.com/34512538/64970223-56ad9080-d8e0-11e9-8b71-f0a984b84f38.PNG)  
+- Google  
+![oauthgoogle](https://user-images.githubusercontent.com/34512538/65257015-7c82a180-db3b-11e9-9be0-e735f0940853.PNG)
+
+
 
 ## ISSUE
-- social login -1004 error
+- social login -1004 error [kakao]
 ## ToDo
 
 
