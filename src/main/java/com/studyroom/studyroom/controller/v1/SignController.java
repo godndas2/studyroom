@@ -18,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.Collections;
 import java.util.Optional;
 
@@ -97,5 +98,10 @@ public class SignController {
                 .build();
         userRepository.save(addUser);
         return responseService.getSuccessResult();
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public Principal home(Principal principal) {
+        return principal;
     }
 }
