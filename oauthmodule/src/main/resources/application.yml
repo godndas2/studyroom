@@ -1,0 +1,13 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id:
+            client-secret:
+          # TODO facebook
+custom:
+  oauth2:
+    kakao:
+      client-id:

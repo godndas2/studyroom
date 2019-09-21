@@ -24,8 +24,8 @@ import static com.oauth.module.oauthmodule.security.SocialType.GOOGLE;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    //@Override
-    public void confiure(HttpSecurity http) throws Exception {
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/", "/oauth2/**", "/login/**", "/css/**"
                 ,"/images/**", "/js/**", "/console/**")
