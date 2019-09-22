@@ -49,7 +49,8 @@ Https Keystore generate : keytool -genkey -alias tomcat -storetype PKCS12 -keyal
 
 
 ## ISSUE
-- social login -1004 error [kakao]
+- Facebook Login 정책이 바뀜 (Https 필수)
 ## ToDo
+- Azure Oauth
 
 
