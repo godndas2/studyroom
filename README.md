@@ -53,6 +53,7 @@ Https Keystore generate : keytool -genkey -alias tomcat -storetype PKCS12 -keyal
 
 ## ISSUE
 - Facebook Login 정책이 바뀜 (Https 필수)
+- google oauth접속시 java.lang.IllegalArgumentException: Unrecognized field "hd" (Class com.studyroom.studyroom.model.social.GoogleUserDetails), not marked as ignorable
 ## ToDo
 - Azure Oauth
 
