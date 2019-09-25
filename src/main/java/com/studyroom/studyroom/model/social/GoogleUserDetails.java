@@ -1,9 +1,11 @@
 package com.studyroom.studyroom.model.social;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 
 @Getter
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class GoogleUserDetails {
     private String sub;
     private String name;

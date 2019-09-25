@@ -4,10 +4,16 @@ spring:
       client:
         registration:
           google:
-            client-id:
-            client-secret:
-          # TODO facebook
+            client-id: 331153258024-lfu8v6i7m0emfrdf7retdsdlgpqa5foa.apps.googleusercontent.com
+            client-secret: fjYdo01MNhrzna4JF-3o8WTn
+            # TODO facebook Login 정책이 Https로 바뀜
+          facebook:
+            client-id: 375579863367028
+            client_secret: ed43d831e5bcaaba99eb137453d1c7b8
 custom:
   oauth2:
     kakao:
-      client-id:
+      client-id: 877cf350333227a753e311bd4d5b5fe6
+
+server:
+  port: 8090
