@@ -16,7 +16,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.client.RestTemplate;
 
 @EnableJpaAuditing // CommonDateEntity Auditing 활성화
-
 @SpringBootApplication
 public class StudyroomApplication implements CommandLineRunner {
 
