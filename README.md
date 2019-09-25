@@ -54,6 +54,7 @@ Https Keystore generate : keytool -genkey -alias tomcat -storetype PKCS12 -keyal
 ## ISSUE
 - Facebook Login 정책이 바뀜 (Https 필수)
 - google oauth 접속 후 로그인 시 java.sql.SQLSyntaxErrorException: Unknown column 'user0_.email' in 'field list'
+- mail 
 ## ToDo
 - Azure Oauth
 
