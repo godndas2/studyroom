@@ -1,5 +1,5 @@
 # StudyRoom v1
-## CI
+## CI/CD
 - jenkins
 
 ## Rule
