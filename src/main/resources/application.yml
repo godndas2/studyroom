@@ -1,0 +1,88 @@
+server:
+  ssl:
+    key-store: C:/Users/HalfDev/keystore.p12
+    key-store-password: fjYdo01MNhrzna4JF-3o8WTn
+    keyStoreType: PKCS12
+    keyAlias: tomcat
+    enabled: true
+  port: 443
+
+spring:
+  profiles:
+    active: local # 디폴트 환경
+  messages:
+    basename: i18n/exception
+    encoding: UTF-8
+  social:
+    kakao:
+      client_id: 877cf350333227a753e311bd4d5b5fe6 # REST API Key
+      redirect: /social/login/kakao
+      url:
+        login: https://kauth.kakao.com/oauth/authorize
+        token: https://kauth.kakao.com/oauth/token
+        profile: https://kapi.kakao.com/v2/user/me
+  jwt:
+    secret: halfdev!@$&
+  mail:
+    default-encoding: UTF-8
+    host: smtp.gmail.com
+    username: docshyun@gmail.com
+    password: icbiqtlieouwqrst
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    protocol: smtp
+    test-connection: false
+
+# Google Oauth2.0
+google:
+  client:
+    clientId: 331153258024-lfu8v6i7m0emfrdf7retdsdlgpqa5foa.apps.googleusercontent.com
+    clientSecret: fjYdo01MNhrzna4JF-3o8WTn
+    accessTokenUri: https://www.googleapis.com/oauth2/v4/token
+    userAuthorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+    clientAuthenticationScheme: form
+    scope:
+      - email
+      - profile
+  resource:
+    userInfoUri: https://www.googleapis.com/oauth2/v3/userinfo
+
+#server:
+#  port: 8080
+#
+#spring:
+#  datasource:
+#    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
+#    driver-class-name: org.h2.Driver
+#    username: sa
+#  jpa:
+#    database-platform: org.hibernate.dialect.H2Dialect
+#    database: H2
+#    generate-ddl: false
+#    open-in-view: false
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: none
+#      # i8n 경로 및 Encoding
+#  messages:
+#    basename: i18n/exception
+#    encoding: UTF-8
+#  jwt:
+#    secret: halfdev!@$&
+#  banner:
+#    location: classpath:/banner.txt
+#  social:
+#    kakao:
+#      client_id: 3320a3c2b8a3cab191065782e61d4446 # REST API Key
+#      redirect: /social/login/kakao # SocialController
+#      url:
+#        login: https://kauth.kakao.com/oauth/authorize
+#        token: https://kauth.kakao.com/oauth/token
+#        profile: https://kapi.kakao.com/v2/user/me
+#  url:
+#    base: http://localhost:8080
