@@ -48,14 +48,10 @@ Https Keystore generate : keytool -genkey -alias tomcat -storetype PKCS12 -keyal
 - Spring Security Oauth(Important)  
 ![attemptAuthentication](https://user-images.githubusercontent.com/34512538/65437485-d5fe0f80-de5e-11e9-8254-edae5e261066.PNG)
 
-
-
-
 ## ISSUE
-- Facebook Login 정책이 바뀜 (Https 필수)
+- https://github.com/microsoft/azure-spring-boot/issues/688
 - google oauth 접속 후 로그인 시 java.sql.SQLSyntaxErrorException: Unknown column 'user0_.email' in 'field list'
 - mail 
 ## ToDo
-- Azure Oauth
 
 
