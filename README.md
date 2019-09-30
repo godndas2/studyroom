@@ -11,6 +11,7 @@ DELETE /v1/user/{userId} – userId로 기존회원의 정보를 삭제한다.
 
 <i>Help</i>
 ```
+https://github.com/settings/developers (add to oauth2.0)
 https://localhost:443/swagger-ui.html
 https://localhost:443/social/login
 http://localhost:8080/ <- jenkins port
