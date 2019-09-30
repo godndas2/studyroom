@@ -9,7 +9,10 @@ spring:
             # TODO facebook Login 정책이 Https로 바뀜
           facebook:
             client-id: 375579863367028
-            client_secret: ed43d831e5bcaaba99eb137453d1c7b8
+            client-secret: ed43d831e5bcaaba99eb137453d1c7b8
+          github:
+            client-id : a8f83d7716d19a4845c2
+            client-secret: e194d124119032dc9f7d359d6a138cf5c4d4ae70
 custom:
   oauth2:
     kakao:
