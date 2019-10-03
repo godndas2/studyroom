@@ -16,8 +16,13 @@
 //
 //    private final OAuth2AuthorizedClientService oAuth2AuthorizedClientService;
 //
+<<<<<<< HEAD
 //    @PreAuthorize("hasRole('Users')")
 //    @GetMapping("user")
+=======
+//    @PreAuthorize("hasRole('모든 사용자')")
+//    @GetMapping("/user")
+>>>>>>> b788f9134de6622cbdd2620d30e90923a09edb60
 //    @ResponseBody
 //    public String helloWorld() {
 //        return "It's User-s!";
