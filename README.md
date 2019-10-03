@@ -56,5 +56,6 @@ Https Keystore generate : keytool -genkey -alias tomcat -storetype PKCS12 -keyal
 - google oauth 접속 후 로그인 시 java.sql.SQLSyntaxErrorException: Unknown column 'user0_.email' in 'field list'
 - mail 
 ## ToDo
+- azure https://docs.microsoft.com/ko-kr/java/azure/spring-framework/configure-spring-boot-starter-java-app-with-azure-active-directory?view=azure-java-stable
 
 
