@@ -20,11 +20,10 @@ public class HomeController {
 
 //    private final OAuth2AuthorizedClientService oAuth2AuthorizedClientService;
 
-    @PreAuthorize("hasRole('Users')")
+    @PreAuthorize("hasRole('group')")
     @GetMapping("/")
-    @ResponseBody
     public String user() {
-        return "Hello Users";
+        return "test";
     }
 
 //    @PreAuthorize("hasRole('Users2')")
