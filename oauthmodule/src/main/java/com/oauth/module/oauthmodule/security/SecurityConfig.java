@@ -17,8 +17,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static com.oauth.module.oauthmodule.security.SocialType.FACEBOOK;
-import static com.oauth.module.oauthmodule.security.SocialType.GOOGLE;
+import static com.oauth.module.oauthmodule.security.SocialType.*;
 
 @Configuration
 @EnableWebSecurity
@@ -33,6 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // facebook, google 접근시 권한이 있을 때 url 접근가능
                 .antMatchers("/facebook").hasAuthority(FACEBOOK.getRoleType())
                 .antMatchers("/google").hasAuthority(GOOGLE.getRoleType())
+                .antMatchers("/github").hasAuthority(GITHUB.getRoleType())
                 .anyRequest().authenticated()
                 .and()
                 .oauth2Login()
@@ -85,6 +85,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .scope("email")
                         .build();
             }
+
+        if ("github".equals(client)) {
+            OAuth2ClientProperties.Registration registration = clientProperties.getRegistration().get("github");
+
+            return CommonOAuth2Provider.GITHUB.getBuilder(client)
+                    .clientId(registration.getClientId())
+                    .clientSecret(registration.getClientSecret())
+                    .scope("email", "profile")
+                    .build();
+        }
             return null;
         }
 }

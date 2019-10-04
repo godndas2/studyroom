@@ -15,7 +15,8 @@
 //public class HelloController {
 //
 //    private final OAuth2AuthorizedClientService oAuth2AuthorizedClientService;
-//
+////    @PreAuthorize("hasRole('Users')")
+//    @GetMapping("user")
 //    @PreAuthorize("hasRole('모든 사용자')")
 //    @GetMapping("/user")
 //    @ResponseBody

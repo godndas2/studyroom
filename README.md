@@ -11,6 +11,7 @@ DELETE /v1/user/{userId} – userId로 기존회원의 정보를 삭제한다.
 
 <i>Help</i>
 ```
+https://github.com/settings/developers (add to oauth2.0)
 https://localhost:443/swagger-ui.html
 https://localhost:443/social/login
 http://localhost:8080/ <- jenkins port
@@ -45,6 +46,10 @@ Https Keystore generate : keytool -genkey -alias tomcat -storetype PKCS12 -keyal
 ![https](https://user-images.githubusercontent.com/34512538/64970223-56ad9080-d8e0-11e9-8b71-f0a984b84f38.PNG)  
 - Google  
 ![oauthgoogle](https://user-images.githubusercontent.com/34512538/65257015-7c82a180-db3b-11e9-9be0-e735f0940853.PNG)  
+- github  
+![githuboauth](https://user-images.githubusercontent.com/34512538/65892204-da877280-e3e0-11e9-9263-331b55c1a858.PNG)  
+- microsoft  
+![aad](https://user-images.githubusercontent.com/34512538/66216590-b9849180-e700-11e9-9ee6-f2330602d7ee.PNG)  
 - Spring Security Oauth(Important)  
 ![attemptAuthentication](https://user-images.githubusercontent.com/34512538/65437485-d5fe0f80-de5e-11e9-8254-edae5e261066.PNG)
 
@@ -53,5 +58,7 @@ Https Keystore generate : keytool -genkey -alias tomcat -storetype PKCS12 -keyal
 - google oauth 접속 후 로그인 시 java.sql.SQLSyntaxErrorException: Unknown column 'user0_.email' in 'field list'
 - mail 
 ## ToDo
+- azure https://docs.microsoft.com/ko-kr/java/azure/spring-framework/configure-spring-boot-starter-java-app-with-azure-active-directory?view=azure-java-stable  
+- github 계정으로는 aad oauth 성공(회사계정으로는 portal 쪽 setting 확인이 필요함)
 
 
