@@ -59,6 +59,7 @@ Https Keystore generate : keytool -genkey -alias tomcat -storetype PKCS12 -keyal
 - mail 
 ## ToDo
 - azure https://docs.microsoft.com/ko-kr/java/azure/spring-framework/configure-spring-boot-starter-java-app-with-azure-active-directory?view=azure-java-stable  
-- github 계정으로는 aad oauth 성공(회사계정으로는 portal 쪽 setting 확인이 필요함)
+- github 계정으로는 aad oauth 성공(회사계정으로는 portal 쪽 setting 확인이 필요함)  
+- naver oauth
 
 
