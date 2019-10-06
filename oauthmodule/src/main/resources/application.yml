@@ -17,6 +17,8 @@ custom:
   oauth2:
     kakao:
       client-id: 877cf350333227a753e311bd4d5b5fe6
+#    naver:
+#      client-id:
 
 server:
   port: 8090
