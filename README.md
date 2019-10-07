@@ -55,7 +55,7 @@ Https Keystore generate : keytool -genkey -alias tomcat -storetype PKCS12 -keyal
 
 ## ISSUE
 - https://github.com/microsoft/azure-spring-boot/issues/688
-- google oauth 접속 후 로그인 시 java.sql.SQLSyntaxErrorException: Unknown column 'user0_.email' in 'field list'
+- master module의 email unknown error가 발생하는데 log를 잘 
 - mail 
 ## ToDo
 - azure https://docs.microsoft.com/ko-kr/java/azure/spring-framework/configure-spring-boot-starter-java-app-with-azure-active-directory?view=azure-java-stable  
