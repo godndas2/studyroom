@@ -4,7 +4,7 @@ logging:
     com.rest.api: debug
 
 spring:
-  profiles: local
+  profiles: dev
   datasource:
     url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
     driver-class-name: org.h2.Driver
@@ -17,4 +17,4 @@ spring:
     showSql: true
     generate-ddl: true
   url:
-    base: http://localhost:8099
+    base: http://localhost:8080

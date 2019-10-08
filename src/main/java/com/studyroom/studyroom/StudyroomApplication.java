@@ -1,7 +1,5 @@
 package com.studyroom.studyroom;
 
-import com.studyroom.studyroom.config.mail.MailHandler;
-import com.studyroom.studyroom.model.mail.Mail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.CommandLineRunner;
@@ -17,7 +15,7 @@ import org.springframework.web.client.RestTemplate;
 
 @EnableJpaAuditing // CommonDateEntity Auditing 활성화
 @SpringBootApplication
-public class StudyroomApplication implements CommandLineRunner {
+public class StudyroomApplication  {//implements CommandLineRunner
 
     private static Logger log = LoggerFactory.getLogger(StudyroomApplication.class);
 
@@ -38,19 +36,23 @@ public class StudyroomApplication implements CommandLineRunner {
     }
 
     // Autowired 안됨.
-    @Autowired
-    private MailHandler mailService;
+//    @Autowired
+//    private MailHandler mailService;
+//
+//    @Override
+//    public void run(String... args) {
+//        log.info("Spring Mail - Sending Simple Email with JavaMailSender Example");
+//        Mail mail = new Mail();
+//        mail.setFrom("no-reply@memorynotfound.com");
+//        mail.setTo("docshyun@gmail.com");
+//        mail.setSubject("Sending Simple Email with JavaMailSender Example");
+//        mail.setContent("This tutorial demonstrates how to send a simple email using Spring Framework.");
+//
+//        mailService.sendSimpleMessage(mail);
 
-    @Override
-    public void run(String... args) {
-        log.info("Spring Mail - Sending Simple Email with JavaMailSender Example");
-        Mail mail = new Mail();
-        mail.setFrom("no-reply@memorynotfound.com");
-        mail.setTo("docshyun@gmail.com");
-        mail.setSubject("Sending Simple Email with JavaMailSender Example");
-        mail.setContent("This tutorial demonstrates how to send a simple email using Spring Framework.");
 
-        mailService.sendSimpleMessage(mail);
+
+
 //        System.out.println("sending email..");
 //
 //        try {
@@ -78,4 +80,4 @@ public class StudyroomApplication implements CommandLineRunner {
 //    }
 
 
-}
+//}

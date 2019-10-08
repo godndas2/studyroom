@@ -55,11 +55,15 @@ public class SignController {
                                @ApiParam(value = "비밀번호", required = true)
                                @RequestParam String password,
                                @ApiParam(value = "이름", required = true)
-                               @RequestParam String name) {
+                               @RequestParam String name,
+                               @ApiParam(value = "이메일", required = true)
+                               @RequestParam String email
+                               ) {
         userRepository.save(User.builder()
                 .uid(id)
                 .password(passwordEncoder.encode(password))
                 .name(name)
+                .email(email)
                 .roles(Collections.singletonList("ROLE_USER"))
                 .build());
         return responseService.getSuccessResult();
