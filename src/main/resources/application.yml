@@ -23,20 +23,20 @@ spring:
         profile: https://kapi.kakao.com/v2/user/me
   jwt:
     secret: halfdev!@$&
-  mail:
-    default-encoding: UTF-8
-    host: smtp.gmail.com
-    username: docshyun@gmail.com
-    password: icbiqtlieouwqrst
-    port: 587
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
-    protocol: smtp
-    test-connection: false
+#  mail:
+#    default-encoding: UTF-8
+#    host: smtp.gmail.com
+#    username: docshyun@gmail.com
+#    password: icbiqtlieouwqrst
+#    port: 587
+#    properties:
+#      mail:
+#        smtp:
+#          auth: true
+#          starttls:
+#            enable: true
+#    protocol: smtp
+#    test-connection: false
 
 # Google Oauth2.0
 google:
