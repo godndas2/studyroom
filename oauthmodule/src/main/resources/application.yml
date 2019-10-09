@@ -1,4 +1,22 @@
 spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/studyroom?useUnicode=true&autoReconnect=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: studyroom
+    password: test
+    initialization-mode: always
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database: mysql
+    generate-ddl: false
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate.format_sql: true
   security:
     oauth2:
       client:
@@ -13,6 +31,8 @@ spring:
           github:
             client-id : a8f83d7716d19a4845c2
             client-secret: e194d124119032dc9f7d359d6a138cf5c4d4ae70
+            jwt:
+                secret: halfdev!@$&
 custom:
   oauth2:
     kakao:
@@ -20,5 +40,6 @@ custom:
 #    naver:
 #      client-id:
 
+# Port Number
 server:
   port: 8090
