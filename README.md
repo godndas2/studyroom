@@ -59,7 +59,22 @@ Https Keystore generate : keytool -genkey -alias tomcat -storetype PKCS12 -keyal
 "refresh_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9......",
 "expires_in":35998,
 "scope":"read"
-}
+}  
+- Refresh Token check  
+> // create token
+{"access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NzA5MTAyMzQsInVzZXJfbmFtZSI6Imh1Lmh5dW5Ac29mdHdhcmVpbmxpZmUuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIl0sImp0aSI6ImNkNzYyYjQ1LTI0ZGYtNGNmNC1iMjk5LWZjY2RjM2JmNGRjOSIsImNsaWVudF9pZCI6InRlc3RDbGllbnRJZCIsInNjb3BlIjpbInJlYWQiXX0.OKpZGkZKlWatdVKZuNxtEPA4i5Yei7CJIV3ZileDhfY",
+"token_type":"bearer",
+"refresh_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJodS5oeXVuQHNvZnR3YXJlaW5saWZlLmNvbSIsInNjb3BlIjpbInJlYWQiXSwiYXRpIjoiY2Q3NjJiNDUtMjRkZi00Y2Y0LWIyOTktZmNjZGMzYmY0ZGM5IiwiZXhwIjoxNTcwOTI0MjM0LCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwianRpIjoiNzRhOTI0YzMtMzU2NC00ZmIxLTk5MTctNjFhMDk4MmZmNjA0IiwiY2xpZW50X2lkIjoidGVzdENsaWVudElkIn0.ncIN_1uTEQtVhgDOg2VQ8tXo-VSsau9JbPqE_ThyNEY",
+"expires_in":35999,
+"scope":"read"
+}   
+> // change - > refresh token -> access token modifiy
+{"access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NzA5MTAzMTUsInVzZXJfbmFtZSI6Imh1Lmh5dW5Ac29mdHdhcmVpbmxpZmUuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIl0sImp0aSI6IjViNWViZmQzLTE3YmUtNDg4MC04ZTczLTAwYmEzYjc5ZDYwYSIsImNsaWVudF9pZCI6InRlc3RDbGllbnRJZCIsInNjb3BlIjpbInJlYWQiXX0.eqB37caMfiT4iYRwlPOxdv_1ZZtAdaLqtyENjn2MWQk",
+"token_type":"bearer",
+"refresh_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJodS5oeXVuQHNvZnR3YXJlaW5saWZlLmNvbSIsInNjb3BlIjpbInJlYWQiXSwiYXRpIjoiNWI1ZWJmZDMtMTdiZS00ODgwLThlNzMtMDBiYTNiNzlkNjBhIiwiZXhwIjoxNTcwOTI0MjM0LCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwianRpIjoiNzRhOTI0YzMtMzU2NC00ZmIxLTk5MTctNjFhMDk4MmZmNjA0IiwiY2xpZW50X2lkIjoidGVzdENsaWVudElkIn0.qRnoR1e-YaKVfxFt5chxHiX76FZIcBy-buXnV413OPY",
+"expires_in":35999,
+"scope":"read"
+}  
 
 ## ISSUE
 - mail 
