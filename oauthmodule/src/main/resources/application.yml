@@ -31,8 +31,12 @@ spring:
           github:
             client-id : a8f83d7716d19a4845c2
             client-secret: e194d124119032dc9f7d359d6a138cf5c4d4ae70
-            jwt:
-                secret: halfdev!@$&
+    # refresh token 복호화 key
+    security:
+      oauth2:
+        jwt:
+          signKey: halfdev!@$&
+
 custom:
   oauth2:
     kakao:

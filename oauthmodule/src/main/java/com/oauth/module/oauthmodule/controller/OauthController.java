@@ -17,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 @RequiredArgsConstructor
 @RequestMapping("/oauth2")
 public class OauthController {
+
 // http://localhost:8090/oauth/authorize?client_id=testClientId&redirect_uri=http://localhost:8090/oauth2/callback&response_type=code&scope=read
     private final Gson gson;
     private final RestTemplate restTemplate;
@@ -35,6 +36,29 @@ public class OauthController {
         params.add("code", code);
         params.add("grant_type", "authorization_code");
         params.add("redirect_uri", "http://localhost:8090/oauth2/callback");
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(params, headers);
+        ResponseEntity<String> response = restTemplate.postForEntity("http://localhost:8090/oauth/token", request, String.class);
+        if (response.getStatusCode() == HttpStatus.OK) {
+            return gson.fromJson(response.getBody(), OauthToken.class);
+        }
+        return null;
+    }
+
+    // Refresh Token check
+    @GetMapping(value = "/token/refresh")
+    public OauthToken refreshToken(@RequestParam String refreshToken) {
+
+        String credentials = "testClientId:testSecret";
+        String encodedCredentials = new String(Base64.encodeBase64(credentials.getBytes()));
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        headers.add("Accept", MediaType.APPLICATION_JSON_VALUE);
+        headers.add("Authorization", "Basic " + encodedCredentials);
+
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        params.add("refresh_token", refreshToken);
+        params.add("grant_type", "refresh_token");
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(params, headers);
         ResponseEntity<String> response = restTemplate.postForEntity("http://localhost:8090/oauth/token", request, String.class);
         if (response.getStatusCode() == HttpStatus.OK) {
