@@ -51,15 +51,35 @@ Https Keystore generate : keytool -genkey -alias tomcat -storetype PKCS12 -keyal
 - microsoft  
 ![aad](https://user-images.githubusercontent.com/34512538/66216590-b9849180-e700-11e9-9ee6-f2330602d7ee.PNG)  
 - Spring Security Oauth(Important)  
-![attemptAuthentication](https://user-images.githubusercontent.com/34512538/65437485-d5fe0f80-de5e-11e9-8254-edae5e261066.PNG)
+![attemptAuthentication](https://user-images.githubusercontent.com/34512538/65437485-d5fe0f80-de5e-11e9-8254-edae5e261066.PNG)  
+## Jwt Token
+- SignIn  
+> {"access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ....",
+"token_type":"bearer",
+"refresh_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9......",
+"expires_in":35998,
+"scope":"read"
+}  
+- Refresh Token check  
+> // create token
+{"access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NzA5MTAyMzQsInVzZXJfbmFtZSI6Imh1Lmh5dW5Ac29mdHdhcmVpbmxpZmUuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIl0sImp0aSI6ImNkNzYyYjQ1LTI0ZGYtNGNmNC1iMjk5LWZjY2RjM2JmNGRjOSIsImNsaWVudF9pZCI6InRlc3RDbGllbnRJZCIsInNjb3BlIjpbInJlYWQiXX0.OKpZGkZKlWatdVKZuNxtEPA4i5Yei7CJIV3ZileDhfY",
+"token_type":"bearer",
+"refresh_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJodS5oeXVuQHNvZnR3YXJlaW5saWZlLmNvbSIsInNjb3BlIjpbInJlYWQiXSwiYXRpIjoiY2Q3NjJiNDUtMjRkZi00Y2Y0LWIyOTktZmNjZGMzYmY0ZGM5IiwiZXhwIjoxNTcwOTI0MjM0LCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwianRpIjoiNzRhOTI0YzMtMzU2NC00ZmIxLTk5MTctNjFhMDk4MmZmNjA0IiwiY2xpZW50X2lkIjoidGVzdENsaWVudElkIn0.ncIN_1uTEQtVhgDOg2VQ8tXo-VSsau9JbPqE_ThyNEY",
+"expires_in":35999,
+"scope":"read"
+}   
+> // change - > refresh token -> access token modifiy
+{"access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NzA5MTAzMTUsInVzZXJfbmFtZSI6Imh1Lmh5dW5Ac29mdHdhcmVpbmxpZmUuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIl0sImp0aSI6IjViNWViZmQzLTE3YmUtNDg4MC04ZTczLTAwYmEzYjc5ZDYwYSIsImNsaWVudF9pZCI6InRlc3RDbGllbnRJZCIsInNjb3BlIjpbInJlYWQiXX0.eqB37caMfiT4iYRwlPOxdv_1ZZtAdaLqtyENjn2MWQk",
+"token_type":"bearer",
+"refresh_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJodS5oeXVuQHNvZnR3YXJlaW5saWZlLmNvbSIsInNjb3BlIjpbInJlYWQiXSwiYXRpIjoiNWI1ZWJmZDMtMTdiZS00ODgwLThlNzMtMDBiYTNiNzlkNjBhIiwiZXhwIjoxNTcwOTI0MjM0LCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwianRpIjoiNzRhOTI0YzMtMzU2NC00ZmIxLTk5MTctNjFhMDk4MmZmNjA0IiwiY2xpZW50X2lkIjoidGVzdENsaWVudElkIn0.qRnoR1e-YaKVfxFt5chxHiX76FZIcBy-buXnV413OPY",
+"expires_in":35999,
+"scope":"read"
+}  
 
 ## ISSUE
-- https://github.com/microsoft/azure-spring-boot/issues/688
-- master module의 email unknown error가 발생하는데 log를 잘 
 - mail 
 ## ToDo
 - azure https://docs.microsoft.com/ko-kr/java/azure/spring-framework/configure-spring-boot-starter-java-app-with-azure-active-directory?view=azure-java-stable  
-- github 계정으로는 aad oauth 성공(회사계정으로는 portal 쪽 setting 확인이 필요함)  
 - naver oauth
 
 
