@@ -51,15 +51,20 @@ Https Keystore generate : keytool -genkey -alias tomcat -storetype PKCS12 -keyal
 - microsoft  
 ![aad](https://user-images.githubusercontent.com/34512538/66216590-b9849180-e700-11e9-9ee6-f2330602d7ee.PNG)  
 - Spring Security Oauth(Important)  
-![attemptAuthentication](https://user-images.githubusercontent.com/34512538/65437485-d5fe0f80-de5e-11e9-8254-edae5e261066.PNG)
+![attemptAuthentication](https://user-images.githubusercontent.com/34512538/65437485-d5fe0f80-de5e-11e9-8254-edae5e261066.PNG)  
+## Jwt Token
+- SignIn  
+> {"access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ....",
+"token_type":"bearer",
+"refresh_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9......",
+"expires_in":35998,
+"scope":"read"
+}
 
 ## ISSUE
-- https://github.com/microsoft/azure-spring-boot/issues/688
-- master module의 email unknown error가 발생하는데 log를 잘 
 - mail 
 ## ToDo
 - azure https://docs.microsoft.com/ko-kr/java/azure/spring-framework/configure-spring-boot-starter-java-app-with-azure-active-directory?view=azure-java-stable  
 - naver oauth
-- module 합치는 방법..?
 
 
