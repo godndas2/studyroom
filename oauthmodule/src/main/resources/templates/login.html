@@ -27,7 +27,7 @@
     for (var i = 0; i < social.length; ++i) {
         social[i].addEventListener("click", function () {
             var socialType = this.getAttribute("data-social");
-            location.href = "/oauth2/authorization/" + socialType
+            location.href = "/oauth2/authorization/" + socialType;
             console.log("click");
         }, false);
     }

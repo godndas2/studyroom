@@ -14,7 +14,7 @@ spring:
     open-in-view: false
     show-sql: true
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
     properties:
       hibernate.format_sql: true
   security:
@@ -35,7 +35,7 @@ spring:
     security:
       oauth2:
         jwt:
-          signKey: halfdev!@$&
+          signkey: halfdev!@$&
 
 custom:
   oauth2:
