@@ -4,6 +4,7 @@ package com.oauth.module.oauthmodule.security.config;
 import com.oauth.module.oauthmodule.security.service.CustomUserDetailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -11,7 +12,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
 import javax.sql.DataSource;
 
@@ -37,10 +38,10 @@ public class Oauth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
      * Jwt 사용안할시 사용
      * bearer token 활성화
      */
-    @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
-        endpoints.tokenStore(new JdbcTokenStore(dataSource)).userDetailsService(customUserDetailService);
-    }
+//    @Override
+//    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
+//        endpoints.tokenStore(new JdbcTokenStore(dataSource)).userDetailsService(customUserDetailService);
+//    }
 
     /*
     * Resource서버에서 token 검증 요청을 Authorization서버로 보낼때 /oauth/check_token을 호출하는데,
@@ -61,20 +62,20 @@ public class Oauth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
       * refresh token이 정상인지 회원 정보를 조회한다
       *
      */
-//    @Override
-//    public void configure(AuthorizationServerEndpointsConfigurer endpointsConfigurer) throws Exception {
-//        super.configure(endpointsConfigurer);
-//        endpointsConfigurer.accessTokenConverter(jwtAccessTokenConverter()).userDetailsService(customUserDetailService);
-//    }
+    @Override
+    public void configure(AuthorizationServerEndpointsConfigurer endpointsConfigurer) throws Exception {
+        super.configure(endpointsConfigurer);
+        endpointsConfigurer.accessTokenConverter(jwtAccessTokenConverter()).userDetailsService(customUserDetailService);
+    }
 
     /**
      * Jwt Token Converter
      *
      */
-//    @Bean
-//    public JwtAccessTokenConverter jwtAccessTokenConverter() {
-//        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-//        converter.setSigningKey(signKey);
-//        return converter;
-//    }
+    @Bean
+    public JwtAccessTokenConverter jwtAccessTokenConverter() {
+        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+        converter.setSigningKey(signKey);
+        return converter;
+    }
 }
