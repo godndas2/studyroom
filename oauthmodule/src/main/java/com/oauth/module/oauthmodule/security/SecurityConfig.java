@@ -75,9 +75,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests().antMatchers("/oauth/**"
                 ,"/oauth/token"
-                , "/oauth2/callback").permitAll()
+                , "/oauth2/callback"
+                ,"/oauth2/authorization/**").permitAll()
                 .and()
-                .formLogin().and()
+                .formLogin()
+                .loginPage("/login")
+                .loginProcessingUrl("/login")
+                .failureUrl("/login")
+                .and()
+                .logout()
+                .and()
                 .httpBasic();
     }
 
