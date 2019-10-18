@@ -14,6 +14,7 @@ import org.springframework.security.config.oauth2.client.CommonOAuth2Provider;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 
 import java.util.List;
 import java.util.Objects;
@@ -67,25 +68,58 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 ////                .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login"));
 ////    }
 
+//    @Override
+//    protected void configure(HttpSecurity security) throws Exception {
+//        security
+//                .csrf().disable()
+//                .headers().frameOptions().disable()
+//                .and()
+//                .authorizeRequests().antMatchers(
+//      "/oauth/**"
+//                ,"/oauth/token"
+//                , "/oauth2/callback"
+//                ,"/oauth2/authorization/**"
+//                ,"/error")
+//                .permitAll()
+////                .antMatchers("/google").hasAnyAuthority(SocialType.GOOGLE.getRoleType())
+//                .and()
+//                .formLogin()
+//                .loginPage("/login")
+//                .loginProcessingUrl("/login")
+//                .failureUrl("/error")
+//                .and()
+//                .logout()
+//                .and()
+//                .httpBasic();
+//    }
+
     @Override
-    protected void configure(HttpSecurity security) throws Exception {
-        security
+    public void configure(HttpSecurity http) throws Exception {
+        http
                 .csrf().disable()
                 .headers().frameOptions().disable()
                 .and()
-                .authorizeRequests().antMatchers("/oauth/**"
-                ,"/oauth/token"
-                , "/oauth2/callback"
-                ,"/oauth2/authorization/**").permitAll()
+                .authorizeRequests().antMatchers(
+        "/oauth/**"
+                ,"/oauth2/**"
+                ,"/login"
+                ,"/error")
+                .permitAll()
+                //.antMatchers("/facebook").hasAnyAuthority(FACEBOOK.getRoleType())
+                .antMatchers("/google").hasAnyAuthority(SocialType.GOOGLE.getRoleType())
+                .anyRequest().authenticated()
                 .and()
-                .formLogin()
+                .oauth2Login()
+//                .formLogin()
+//                .oauth2Login()
                 .loginPage("/login")
-                .loginProcessingUrl("/login")
-                .failureUrl("/login")
+                .defaultSuccessUrl("/loginSuccess")
+                .failureUrl("/loginFailure")
                 .and()
                 .logout()
                 .and()
-                .httpBasic();
+                .exceptionHandling()
+                .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login"));
     }
 
     // TODO token 정보를 DB에 저장
