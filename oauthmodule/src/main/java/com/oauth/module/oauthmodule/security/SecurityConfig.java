@@ -109,6 +109,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/google").hasAnyAuthority(SocialType.GOOGLE.getRoleType())
                 .anyRequest().authenticated()
                 .and()
+                // TODO oauth2Login으로 해주니까 oauth로 바로 간다. 확인해보자
                 .oauth2Login()
 //                .formLogin()
 //                .oauth2Login()
