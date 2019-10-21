@@ -110,7 +110,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 // TODO oauth2Login으로 해주니까 oauth로 바로 간다. 확인해보자
-                .oauth2Login()
+                .oauth2Login() // httpBasic () 및 formLogin () 요소 와 유사한 방식
 //                .formLogin()
 //                .oauth2Login()
                 .loginPage("/login")
