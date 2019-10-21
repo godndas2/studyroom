@@ -6,13 +6,18 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
+import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 import javax.sql.DataSource;
 
@@ -28,6 +33,7 @@ public class Oauth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
     @Value("{security.oauth2.jwt.signkey}")
     private String signKey;
 
+    // oauth client detail 테이블을 사용하여 유저를 조회 하므로 다음과 같이 client 는 db를 바라보게 세팅한다.
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.jdbc(dataSource).passwordEncoder(passwordEncoder);
@@ -68,8 +74,21 @@ public class Oauth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
         endpointsConfigurer.accessTokenConverter(jwtAccessTokenConverter()).userDetailsService(customUserDetailService);
     }
 
+    // custom으로 외부에서 client와 secret을 등록하기 위해서 필요한 서비스를 위해 열어준다.
+    @Bean
+    @Primary
+    public JdbcClientDetailsService jdbcClientDetailsService(DataSource dataSource) {
+        return new JdbcClientDetailsService(dataSource);
+    }
+
+    // tokenstore 에서 jwtTokenStore 를 사용하고 암호화를 진행단.
+    @Bean
+    public TokenStore tokenStore() {
+        return new JwtTokenStore(jwtAccessTokenConverter());
+    }
+
     /**
-     * Jwt Token Converter
+     * Jwt Token Converter + signKey auth
      *
      */
     @Bean
@@ -77,5 +96,20 @@ public class Oauth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
         converter.setSigningKey(signKey);
         return converter;
+    }
+
+    // 토큰에 추가적인 정보를 넣어서 저장한다.
+//    @Bean
+//    public TokenEnhancer tokenEnhancer() {
+//        return new CustomTokenEnhancer();
+//    }
+
+    @Bean
+    @Primary
+    public DefaultTokenServices tokenServices() {
+        DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
+        defaultTokenServices.setTokenStore(tokenStore());
+        defaultTokenServices.setSupportRefreshToken(true);
+        return defaultTokenServices;
     }
 }
