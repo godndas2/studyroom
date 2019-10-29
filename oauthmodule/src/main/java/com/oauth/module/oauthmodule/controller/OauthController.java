@@ -19,6 +19,7 @@ import org.springframework.web.client.RestTemplate;
 public class OauthController {
 
 // http://localhost:8090/oauth/authorize?client_id=testClientId&redirect_uri=http://localhost:8090/oauth2/callback&response_type=code&scope=read
+    // TODO 위의 url을 Oauth Url 들과 매칭해보자
     private final Gson gson;
     private final RestTemplate restTemplate;
 

@@ -52,7 +52,7 @@ public class Oauth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
         return converter;
     }
 
-    // security 선언 /v1/token endpint 로 토큰을 받고 나머지는 권한이 있어야 한다.
+    // security 선언 /oauth/check_token endpoint 로 토큰을 받고 나머지는 권한이 있어야 한다.
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()

@@ -43,56 +43,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .roles("USER");
 //    }
 
-//    @Override
-////    public void configure(HttpSecurity http) throws Exception {
-////        http.
-////                csrf().disable()
-////                .headers().frameOptions().disable()
-////                .and()
-////                .authorizeRequests()
-////                .antMatchers("/", "/oauth2/**", "/login/**", "/css/**"
-////                ,"/images/**", "/js/**", "/console/**")
-////                .permitAll()
-////                // facebook, google 접근시 권한이 있을 때 url 접근가능
-////                .antMatchers("/facebook").hasAuthority(FACEBOOK.getRoleType())
-////                .antMatchers("/google").hasAuthority(GOOGLE.getRoleType())
-////                .antMatchers("/github").hasAuthority(GITHUB.getRoleType())
-////                .anyRequest().authenticated()
-////                .and()
-////                .oauth2Login()
-////                .defaultSuccessUrl("/loginSuccess")
-////                .failureUrl("/loginFailure")
-////                .and()
-////                .exceptionHandling()
-////                // 권한이 없을 때 Exception이 발생시키고 /login 으로 이동시킨다
-////                .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login"));
-////    }
-
-//    @Override
-//    protected void configure(HttpSecurity security) throws Exception {
-//        security
-//                .csrf().disable()
-//                .headers().frameOptions().disable()
-//                .and()
-//                .authorizeRequests().antMatchers(
-//      "/oauth/**"
-//                ,"/oauth/token"
-//                , "/oauth2/callback"
-//                ,"/oauth2/authorization/**"
-//                ,"/error")
-//                .permitAll()
-////                .antMatchers("/google").hasAnyAuthority(SocialType.GOOGLE.getRoleType())
-//                .and()
-//                .formLogin()
-//                .loginPage("/login")
-//                .loginProcessingUrl("/login")
-//                .failureUrl("/error")
-//                .and()
-//                .logout()
-//                .and()
-//                .httpBasic();
-//    }
-
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
@@ -101,29 +51,35 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests().antMatchers(
         "/oauth/**"
+                ,"/**"
                 ,"/oauth2/**"
                 ,"/login"
-                ,"/error")
+                ,"/error"
+                ,"/**/favicon.ico")
                 .permitAll()
+                .anyRequest().authenticated()
                 //.antMatchers("/facebook").hasAnyAuthority(FACEBOOK.getRoleType())
                 .antMatchers("/google").hasAnyAuthority(SocialType.GOOGLE.getRoleType())
-                .anyRequest().authenticated()
+                .antMatchers("/kakao").hasAnyAuthority(SocialType.KAKAO.getRoleType())
+                .antMatchers("/facebook").hasAnyAuthority(SocialType.FACEBOOK.getRoleType())
+                .antMatchers("/github").hasAnyAuthority(SocialType.GITHUB.getRoleType())
+                .anyRequest().authenticated() // 인증된 사용자만 요청가능
                 .and()
-                // TODO oauth2Login으로 해주니까 oauth로 바로 간다. 확인해보자
                 .oauth2Login() // httpBasic () 및 formLogin () 요소 와 유사한 방식
 //                .formLogin()
-//                .oauth2Login()
                 .loginPage("/login")
                 .defaultSuccessUrl("/loginSuccess")
                 .failureUrl("/loginFailure")
                 .and()
                 .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/")
+//                .deleteCookies("JSESSIONID")
+//                .invalidateHttpSession(true)
                 .and()
                 .exceptionHandling()
-                .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login"));
+                .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login")); // 인증되지 않은 사용자가 요청 할 경우 /login으로 이동
     }
-
-    // TODO token 정보를 DB에 저장
 
 
     // facebook, google, kakao 인증 정보들을 Memory에서 유지
@@ -157,16 +113,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .scope("email", "profile")
                     .build();
         }
-            if ("facebook".equals(client)) {
-                OAuth2ClientProperties.Registration registration = clientProperties.getRegistration().get("facebook");
 
-                return CommonOAuth2Provider.FACEBOOK.getBuilder(client)
-                        .clientId(registration.getClientId())
-                        .clientSecret(registration.getClientSecret())
-                        .userInfoUri("https://graph.facebook.com/me?fields=id,name,email,link")
-                        .scope("email")
-                        .build();
-            }
+        if ("facebook".equals(client)) {
+            OAuth2ClientProperties.Registration registration = clientProperties.getRegistration().get("facebook");
+
+            return CommonOAuth2Provider.FACEBOOK.getBuilder(client)
+                    .clientId(registration.getClientId())
+                    .clientSecret(registration.getClientSecret())
+                    .userInfoUri("https://graph.facebook.com/me?fields=id,name,email,link")
+                    .scope("email")
+                    .build();
+        }
 
         if ("github".equals(client)) {
             OAuth2ClientProperties.Registration registration = clientProperties.getRegistration().get("github");

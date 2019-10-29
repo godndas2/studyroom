@@ -21,6 +21,12 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 import javax.sql.DataSource;
 
+/**
+ * redirectUri : 인증 완료 후 이동할 Client Web Page 주소로 code 값을 실어서 보내준다.
+ * Authorization_code : Service Provider 가 제공하는 인증 화면에 Login 하고, code 값으로 access_token 을 얻는다.
+ *
+ *
+ * */
 @Configuration
 @EnableAuthorizationServer
 @RequiredArgsConstructor
@@ -34,10 +40,21 @@ public class Oauth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
     private String signKey;
 
     // oauth client detail 테이블을 사용하여 유저를 조회 하므로 다음과 같이 client 는 db를 바라보게 세팅한다.
-    @Override
+//    @Override
+//    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+//        clients.jdbc(dataSource).passwordEncoder(passwordEncoder);
+//    }
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.jdbc(dataSource).passwordEncoder(passwordEncoder);
+        clients.inMemory()
+                .withClient("testClientId")
+                .secret("testSecret")
+                .redirectUris("http://localhost:8090/oauth2/callback")
+                .authorizedGrantTypes("authorization_code")
+                .scopes("read", "write")
+                .accessTokenValiditySeconds(30000);
     }
+
+
 
     /**
      * 토큰 정보를 DB를 통해 관리한다.
