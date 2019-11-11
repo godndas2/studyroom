@@ -1,4 +1,23 @@
+# TODO https setting
 spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/studyroom?useUnicode=true&autoReconnect=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: studyroom
+    password: test
+    initialization-mode: always
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database: mysql
+    generate-ddl: false
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.format_sql: true
   security:
     oauth2:
       client:
@@ -6,13 +25,22 @@ spring:
           google:
             client-id: 331153258024-lfu8v6i7m0emfrdf7retdsdlgpqa5foa.apps.googleusercontent.com
             client-secret: fjYdo01MNhrzna4JF-3o8WTn
-            # TODO facebook Login 정책이 Https로 바뀜
           facebook:
             client-id: 375579863367028
             client-secret: ed43d831e5bcaaba99eb137453d1c7b8
           github:
             client-id : a8f83d7716d19a4845c2
             client-secret: e194d124119032dc9f7d359d6a138cf5c4d4ae70
+    # refresh token 복호화 key
+#    user:
+#      name: halfdev
+#      password: 1234
+
+security:
+  oauth2:
+    jwt:
+      signkey: halfdev!@$&
+
 custom:
   oauth2:
     kakao:
@@ -20,6 +48,9 @@ custom:
     slack:
       client-id: 2821025821.818114335971
       client-secret: 78f56e0774be070f6bff2c180589795b
+#    naver:
+#      client-id:
 
+# Port Number
 server:
   port: 8090
