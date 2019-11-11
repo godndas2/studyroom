@@ -21,6 +21,22 @@ public enum CustomOAuth2Provider {
 
             return builder;
         }
+    },
+
+    SLACK {
+        @Override
+        public ClientRegistration.Builder getBuilder(String registrationId) {
+            ClientRegistration.Builder builder = getBuilder(registrationId,
+                    ClientAuthenticationMethod.POST, DEFAULT_LOGIN_REDIRECT_URL);
+            builder.scope("identity.basic");
+            builder.authorizationUri("https://slack.com/oauth/authorize");
+            builder.tokenUri("https://slack.com/api/oauth.access");
+//            builder.userInfoUri("https://kapi.kakao.com/v2/user/me");
+            builder.userNameAttributeName("id");
+            builder.clientName("Slack");
+
+            return builder;
+        }
     };
 
     private static final String DEFAULT_LOGIN_REDIRECT_URL = "{baseUrl}/login/oauth2/code/{registrationId}";

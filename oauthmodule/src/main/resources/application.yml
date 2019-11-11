@@ -45,6 +45,9 @@ custom:
   oauth2:
     kakao:
       client-id: 877cf350333227a753e311bd4d5b5fe6
+    slack:
+      client-id: 2821025821.818114335971
+      client-secret: 78f56e0774be070f6bff2c180589795b
 #    naver:
 #      client-id:
 
