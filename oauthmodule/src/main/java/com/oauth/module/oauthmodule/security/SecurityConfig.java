@@ -26,13 +26,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/oauth2/**", "/login/**", "/css/**"
-                ,"/images/**", "/js/**", "/console/**")
+                .antMatchers("/"
+                        , "/oauth2/**"
+                        , "/login/**"
+                        , "/css/**"
+                        , "/images/**"
+                        , "/js/**"
+                        , "/console/**")
                 .permitAll()
                 // facebook, google 접근시 권한이 있을 때 url 접근가능
                 .antMatchers("/facebook").hasAuthority(FACEBOOK.getRoleType())
                 .antMatchers("/google").hasAuthority(GOOGLE.getRoleType())
                 .antMatchers("/github").hasAuthority(GITHUB.getRoleType())
+                .antMatchers("/kakao").hasAuthority(KAKAO.getRoleType())
+                .antMatchers("/slack").hasAuthority(SLACK.getRoleType())
                 .anyRequest().authenticated()
                 .and()
                 .oauth2Login()
@@ -48,7 +55,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public ClientRegistrationRepository clientRegistrationRepository(OAuth2ClientProperties oAuth2ClientProperties
                                                 , @Value("${custom.oauth2.kakao.client-id}") String kakaoClientId
-                                                , @Value("${custom.oauth2.kakao.client-secret") String kakaoClientSecret) {
+                                                , @Value("${custom.oauth2.kakao.client-secret") String kakaoClientSecret
+                                                , @Value("${custom.oauth2.slack.client-id}") String slackClientId
+                                                , @Value("${custom.oauth2.slack.client-secret}") String slackClientSecret) {
         List<ClientRegistration> registrations = oAuth2ClientProperties.getRegistration().keySet().stream()
                 .map(client -> getRegistration(oAuth2ClientProperties, client))
                 .filter(Objects::nonNull)
@@ -59,6 +68,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .clientSecret(kakaoClientSecret)
         .jwkSetUri("temp")
         .build());
+
+        registrations.add(CustomOAuth2Provider.SLACK.getBuilder("slack")
+                .clientId(slackClientId)
+                .clientSecret(slackClientSecret)
+                .jwkSetUri("temp")
+                .build());
 
         return new InMemoryClientRegistrationRepository(registrations);
     }
