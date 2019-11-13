@@ -102,8 +102,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public ClientRegistrationRepository clientRegistrationRepository(OAuth2ClientProperties oAuth2ClientProperties
                                                 , @Value("${custom.oauth2.kakao.client-id}") String kakaoClientId
                                                 , @Value("${custom.oauth2.kakao.client-secret") String kakaoClientSecret
-                                                , @Value("${custom.oauth2.slack.client-id}") String slackClientId
-                                                , @Value("${custom.oauth2.slack.client-secret}") String slackClientSecret) {
+//                                                , @Value("${custom.oauth2.slack.client-id}") String slackClientId
+//                                                , @Value("${custom.oauth2.slack.client-secret}") String slackClientSecret
+                                                ) {
         List<ClientRegistration> registrations = oAuth2ClientProperties.getRegistration().keySet().stream()
                 .map(client -> getRegistration(oAuth2ClientProperties, client))
                 .filter(Objects::nonNull)
@@ -116,8 +117,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .build());
 
         registrations.add(CustomOAuth2Provider.SLACK.getBuilder("slack")
-                .clientId(slackClientId)
-                .clientSecret(slackClientSecret)
+                .clientId("2821025821.818114335971")
+                .clientSecret("78f56e0774be070f6bff2c180589795b")
                 .jwkSetUri("temp")
                 .build());
 
