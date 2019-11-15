@@ -13,6 +13,7 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -56,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public ClientRegistrationRepository clientRegistrationRepository(OAuth2ClientProperties oAuth2ClientProperties
                                                 , @Value("${custom.oauth2.kakao.client-id}") String kakaoClientId
                                                 , @Value("${custom.oauth2.kakao.client-secret") String kakaoClientSecret
-                                                , @Value("${custom.oauth2.slack.client-id}") String slackClientId
+//                                                , @Value("${custom.oauth2.slack.client-id}") String slackClientId
                                                 , @Value("${custom.oauth2.slack.client-secret}") String slackClientSecret
                                                 ) {
         List<ClientRegistration> registrations = oAuth2ClientProperties.getRegistration().keySet().stream()
@@ -70,13 +71,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .jwkSetUri("temp")
         .build());
 
-//        double d = 2821025821.818114335971d;
-//        DecimalFormat df = new DecimalFormat("#.########");
-//        df.setRoundingMode(RoundingMode.CEILING);
-//        System.out.println(df.format(d));
+        String slackClientIdValue = "2821025821.818114335971";
+        BigDecimal slackClientId = new BigDecimal(slackClientIdValue);
+        System.out.println(slackClientId.toString());
 
         registrations.add(CustomOAuth2Provider.SLACK.getBuilder("slack")
-                .clientId(slackClientId)
+//                .clientId(slackClientId.toString())
+                                .clientId(slackClientId.toString())
                 .clientSecret(slackClientSecret)
                 .jwkSetUri("temp")
                 .build());
