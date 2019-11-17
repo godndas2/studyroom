@@ -13,7 +13,6 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -58,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                                 , @Value("${custom.oauth2.kakao.client-id}") String kakaoClientId
                                                 , @Value("${custom.oauth2.kakao.client-secret") String kakaoClientSecret
 //                                                , @Value("${custom.oauth2.slack.client-id}") String slackClientId
-                                                , @Value("${custom.oauth2.slack.client-secret}") String slackClientSecret
+//                                                , @Value("${custom.oauth2.slack.client-secret}") String slackClientSecret
                                                 ) {
         List<ClientRegistration> registrations = oAuth2ClientProperties.getRegistration().keySet().stream()
                 .map(client -> getRegistration(oAuth2ClientProperties, client))
@@ -71,14 +70,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .jwkSetUri("temp")
         .build());
 
-        String slackClientIdValue = "2821025821.818114335971";
-        BigDecimal slackClientId = new BigDecimal(slackClientIdValue);
-        System.out.println(slackClientId.toString());
-
         registrations.add(CustomOAuth2Provider.SLACK.getBuilder("slack")
-//                .clientId(slackClientId.toString())
-                                .clientId(slackClientId.toString())
-                .clientSecret(slackClientSecret)
+                .clientId("2821025821.818114335971")
+                .clientSecret("78f56e0774be070f6bff2c180589795b")
                 .jwkSetUri("temp")
                 .build());
 
