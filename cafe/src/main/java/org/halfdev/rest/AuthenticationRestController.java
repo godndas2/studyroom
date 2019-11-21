@@ -3,8 +3,10 @@ package org.halfdev.rest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.RequiredArgsConstructor;
 import org.halfdev.rest.dto.LoginDTO;
+import org.halfdev.security.jwt.JWTFilter;
 import org.halfdev.security.jwt.TokenProvider;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -39,8 +41,9 @@ public class AuthenticationRestController {
         String jwt = tokenProvider.createToken(authentication, rememberMe);
 
         HttpHeaders headers = new HttpHeaders();
-        // start
-//        headers.add();
+        headers.add(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
+
+        return new ResponseEntity<>(new JWTToken(jwt), headers, HttpStatus.OK);
     }
 
     /**
