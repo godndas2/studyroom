@@ -44,6 +44,7 @@ public class AuthenticationRestController {
         headers.add(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
 
         return new ResponseEntity<>(new JWTToken(jwt), headers, HttpStatus.OK);
+
     }
 
     /**
