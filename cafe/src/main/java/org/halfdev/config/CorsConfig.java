@@ -1,4 +1,4 @@
-package org.halfdev.security;
+package org.halfdev.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
