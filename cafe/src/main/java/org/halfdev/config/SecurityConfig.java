@@ -1,6 +1,7 @@
-package org.halfdev.security;
+package org.halfdev.config;
 
 import lombok.RequiredArgsConstructor;
+import org.halfdev.security.jwt.JwtConfigure;
 import org.halfdev.security.jwt.TokenProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -80,9 +81,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/person").hasAuthority("ROLE_USER")
                 .antMatchers("/api/hiddenmessage").hasAuthority("ROLE_ADMIN")
 
-                .anyRequest().authenticated();
+                .anyRequest().authenticated()
+                .and()
+                .apply(securityConfigurerAdapter());
 
     }
 
+    // Filter Logging
+    private JwtConfigure securityConfigurerAdapter() {
+        return new JwtConfigure(tokenProvider);
+    }
 
 }
