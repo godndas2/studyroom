@@ -1,6 +1,8 @@
 package org.halfdev.config;
 
 import lombok.RequiredArgsConstructor;
+import org.halfdev.security.jwt.JwtAccessDeniedHandler;
+import org.halfdev.security.jwt.JwtAuthenticationEntryPoint;
 import org.halfdev.security.jwt.JwtConfigure;
 import org.halfdev.security.jwt.TokenProvider;
 import org.springframework.context.annotation.Bean;
@@ -23,7 +25,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final TokenProvider tokenProvider;
     private final CorsFilter corsFilter;
-    // TODO Handler.class
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
     @Override
     public void configure(WebSecurity web) {
@@ -57,6 +60,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
 
                 .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling()
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .accessDeniedHandler(jwtAccessDeniedHandler)
+
+                .and()
 
                 // enable h2-console
                 .headers()
@@ -65,10 +73,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 // create no session
                 .and()
+
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
                 .and()
+
                 .authorizeRequests()
                 .antMatchers("/api/authenticate").permitAll()
                 // .antMatchers("/api/register").permitAll()
@@ -82,7 +92,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/hiddenmessage").hasAuthority("ROLE_ADMIN")
 
                 .anyRequest().authenticated()
+
                 .and()
+
                 .apply(securityConfigurerAdapter());
 
     }
