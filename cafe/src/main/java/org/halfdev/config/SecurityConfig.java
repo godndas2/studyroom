@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/",
                         "/*.html",
-                        "/favicon.ico",
+                        "/**/favicon.ico",
                         "/**/*.html",
                         "/**/*.css",
                         "/**/*.js",
