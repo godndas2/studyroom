@@ -78,6 +78,7 @@ Https Keystore generate : keytool -genkey -alias tomcat -storetype PKCS12 -keyal
 
 ## ISSUE
 - mail 
+- Module : cafe -> Jwt Token Create 안되는 현상
 ## ToDo
 - azure https://docs.microsoft.com/ko-kr/java/azure/spring-framework/configure-spring-boot-starter-java-app-with-azure-active-directory?view=azure-java-stable  
 - naver oauth
