@@ -2,7 +2,7 @@ package org.halfdev.rest;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.RequiredArgsConstructor;
-import org.halfdev.rest.dto.LoginDTO;
+import org.halfdev.model.dto.LoginDTO;
 import org.halfdev.security.jwt.JWTFilter;
 import org.halfdev.security.jwt.TokenProvider;
 import org.springframework.http.HttpHeaders;
