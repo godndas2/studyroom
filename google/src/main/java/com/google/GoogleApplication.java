@@ -13,7 +13,6 @@ import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.DriveScopes;
 import com.google.api.services.drive.model.File;
 import com.google.api.services.drive.model.FileList;
-import com.google.drive.GoogleDriveStarter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -41,10 +40,9 @@ public class GoogleApplication {
                 .build();
 
         // print the names and ID for up to 10 files
-        // TODO Invalid field selection nextPage Token, files(id, name)
         FileList fileList = drive.files().list()
                 .setPageSize(10)
-                .setFields("nextPage Token, files(id, name)")
+                .setFields("nextPageToken, files(id, name)")
                 .execute();
 
         List<File> files = fileList.getFiles();
@@ -76,7 +74,7 @@ public class GoogleApplication {
     private static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
 
         // Load Client secrets
-        InputStream in = GoogleDriveStarter.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
+        InputStream in = GoogleApplication.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
 
         if (in == null) {
             throw new FileNotFoundException("Resource not found: " + CREDENTIALS_FILE_PATH);
