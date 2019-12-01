@@ -9,23 +9,28 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/brunch?useUnicode=true&autoReconnect=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: brunch
-    password:
+    password: hhw0309010!!@
     initialization-mode: always
   jackson:
     serialization:
       INDENT_OUTPUT: true
 
   jpa:
-    hibernate:
-      ddl-auto: create-drop
-    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database: mysql
+    generate-ddl: false
+    open-in-view: false
     show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.format_sql: true
 
-  h2:
-    console:
-      # URL: jdbc:h2:mem:testdb
-      enabled: true
-      path: /h2-console
+  #  h2:
+#    console:
+#      # URL: jdbc:h2:mem:testdb
+#      enabled: true
+#      path: /h2-console
 
   devtools:
     restart:
