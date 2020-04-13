@@ -1,6 +1,6 @@
 # StudyRoom v1
 ## CI/CD
-- jenkins
+- jenkins.
 
 ## Rule
 GET /v1/user/{userId} – 회원 userId에 해당하는 정보를 조회한다.  
